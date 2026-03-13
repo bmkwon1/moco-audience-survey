@@ -55,7 +55,7 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 .mod-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
 .mod-header h1 { font-size: 20px; font-weight: 700; }
 .mod-sub { color: #666; font-size: 13px; margin-top: 4px; }
-.mod-btns { display: flex; gap: 8px; }
+.mod-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn-mod-back { background: #1a1a1a; color: #aaa; border: 1px solid #333; border-radius: 8px; padding: 8px 14px; font-size: 13px; }
 .btn-mod-back:hover { color: white; }
 .btn-mod-clear { background: #c62828; color: white; border: none; border-radius: 8px; padding: 8px 14px; font-size: 13px; }
@@ -77,7 +77,7 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 .mod-val { color: white; font-size: 15px; font-weight: 700; min-width: 24px; text-align: right; }
 .mod-bar-bg { background: #2a2a2a; border-radius: 4px; height: 8px; }
 .mod-bar-fill { height: 8px; border-radius: 4px; transition: width 0.4s ease; }
-.target-summary { background: #1a1a1a; border-radius: 12px; padding: 18px 20px; }
+.target-summary { background: #1a1a1a; border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
 .target-summary-label { color: #888; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
 .target-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #2a2a2a; }
 .target-row-name { display: flex; align-items: center; gap: 8px; }
@@ -89,150 +89,334 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 .target-total-row { display: flex; justify-content: space-between; padding-top: 12px; flex-wrap: wrap; gap: 4px; }
 .target-total-label { color: #888; font-size: 13px; }
 .target-total-val { color: white; font-size: 14px; font-weight: 700; }
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.status-dot.live { background: #4caf50; }
+.status-dot.error { background: #c62828; }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-var questions=[{id:1,text:"When you start a mo.co session, what are you usually here for?",options:[{label:"Just some fun — I want to play and unwind without thinking too hard",scores:{HC:1}},{label:"To jump in and play — I enjoy the action whether others are around or not",scores:{SD:1}},{label:"To try something new — a different weapon, mode, or build",scores:{EE:1}},{label:"To push myself — I want to take on a challenge and get better",scores:{SA:1}},{label:"To follow the story and explore the world",scores:{NAR:1}}]},{id:2,text:"How do you feel about playing alongside other people in mo.co?",options:[{label:"I love it — having lots of other players around makes it more fun and alive",scores:{SD:1}},{label:"I enjoy it when it's relaxed — I don't want to feel like I'm letting anyone down",scores:{SD:0.5,EE:0.5}},{label:"I'm fine either way — I stay focused on my own play regardless",scores:{SA:1}},{label:"I mostly prefer playing completely alone, at my own pace",scores:{SOL:1,HC:0.5}}]},{id:3,text:"Which of these feels most satisfying when it happens in mo.co?",options:[{label:"Getting a cool new skin, cosmetic, or look for my character",scores:{EE:1}},{label:"Beating a challenge I've failed at before",scores:{SA:1}},{label:"Playing alongside other people and having a fun shared moment",scores:{SD:1}},{label:"Discovering a new weapon, ability, or playstyle that suits me",scores:{EE:0.5,SA:0.5}},{label:"Completing everything in a set or ticking off a milestone",scores:{COL:1}}]},{id:4,text:"If mo.co added a mode where you fight directly against other players and try to beat them, how would you feel?",options:[{label:"Excited — competing against real players and winning is what I enjoy most",scores:{PVP:3}},{label:"Open to it — might be fun casually, but it's not what I play for",scores:{}},{label:"Not really for me — I prefer the challenge to come from the game, not from players",scores:{SD:0.5,SA:0.5,EE:0.5}},{label:"I'd avoid it — winning or losing against real people takes the fun out of it for me",scores:{SD:0.5,SA:0.5}}]},{id:5,text:"When you lose or fail in mo.co, what do you usually do?",options:[{label:"Try again right away — I want to figure out what went wrong",scores:{SA:1}},{label:"Take a short break, then come back to it",scores:{SA:0.5,SD:0.5}},{label:"Move on to something easier or more relaxed",scores:{SD:0.5,EE:0.5}},{label:"I don't really engage with the harder content — I play at my own level",scores:{HC:1,NAR:0.5}}]},{id:6,text:"What keeps you coming back to mo.co?",options:[{label:"There's always something new to unlock or collect",scores:{EE:0.5,COL:0.5}},{label:"I'm getting noticeably better and I can feel it",scores:{SA:1}},{label:"It's fun to be playing alongside other people",scores:{SD:1}},{label:"There's always fresh content, events, or new things to try",scores:{EE:0.5,SD:0.5}},{label:"I want to complete everything and finish what I've started",scores:{COL:1}}]},{id:7,text:"How important is it to you that your character looks unique and reflects your personal style?",options:[{label:"Very important — it's a big part of why I play",scores:{EE:1}},{label:"Somewhat important — I care, but it's not the main reason I'm here",scores:{EE:0.5,SD:0.5}},{label:"Not very important — I focus more on gameplay or progression",scores:{SA:0.5,COL:0.5}},{label:"I don't think about it — I play for other reasons entirely",scores:{HC:0.5,NAR:0.5,SOL:0.5}}]},{id:8,text:"Which of these would make you most excited about an upcoming mo.co update?",options:[{label:"New story, lore, or characters that expand the world",scores:{NAR:1}},{label:"New cosmetics, skins, or ways to customize my look",scores:{EE:1}},{label:"New hard challenges or tougher enemies to master",scores:{SA:1}},{label:"A new season with fresh activities that are fun and easy to jump into",scores:{SD:1}},{label:"New items, collections, or things to complete and unlock",scores:{COL:1}}]}];
+// ─── SUPABASE CONFIG ───────────────────────────────────────────────
+var SUPABASE_URL = "https://bmzdhimzybwprqhxingo.supabase.co";
+var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtemRoaW16eWJ3cHJxaHhpbmdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDA2NTMsImV4cCI6MjA4ODk3NjY1M30.36qq3lSQT66j6hlGdMuwxSaQ3WJxyIUXmTS4Q-9j7i0";
+var TABLE = "responses";
+// ──────────────────────────────────────────────────────────────────
 
-var profiles={SD:{name:"Self-Directed Social",emoji:"🔵",color:"#1a73e8",light:"#e8f0fe",tagline:"I can play how I want, but I'm never alone.",description:"You enjoy gaming on your own terms. You love the energy of co-op and having other players around, but you don't need scheduled sessions or coordination pressure. Drop-in, drop-out is your style.",fit:"mo.co is built for you. Open world areas, casual co-op Rifts, and drop-in events are designed around exactly how you like to play.",traits:["Loves co-op energy without obligation","Plays solo comfortably too","Motivated by fresh content and fun sessions","Social without being dependent"]},EE:{name:"Expressive Explorer",emoji:"🟣",color:"#9c27b0",light:"#f3e5f5",tagline:"This game lets me show who I am, not just how good I am.",description:"You care about how your character looks and what it says about you. Variety, self-expression, and discovering new playstyles are what keep you engaged. You want to be seen, just not judged on performance.",fit:"mo.co's cosmetics, seasonal skins, and weapon variety are designed for you. PvE removes meta anxiety so you can experiment freely.",traits:["Identity-driven player","Loves cosmetics and customization","Explores new builds and modes often","Shares game content with others"]},SA:{name:"Skillful Achiever",emoji:"🟢",color:"#2e7d32",light:"#e8f5e9",tagline:"I'm getting better — and it feels good, not stressful.",description:"You play to improve. Figuring out what went wrong, mastering enemy patterns, and pushing yourself through harder content is genuinely satisfying. You don't need to beat anyone — you're competing with your past self.",fit:"mo.co's twitchy gameplay, Nightmare Rifts, and Trophy Leagues give you a ceiling to chase. Skill is visible and rewarded here.",traits:["Improvement-focused","Retries difficult content to learn","Skill expression matters more than cosmetics","Values clear feedback on performance"]},PVP:{name:"PvP Competitor",emoji:"⚔️",color:"#c62828",light:"#ffebee",tagline:"Winning against real players is the real game.",description:"You're most motivated by direct competition — testing your skills against real opponents, climbing rankings, and winning head-to-head. The zero-sum nature of PvP is what gives the game stakes for you.",fit:"mo.co is currently built around cooperative PvE rather than direct player competition. You might enjoy the challenge content, but the core loop may not fully satisfy this motivation.",traits:["Ranking and competition driven","Enjoys defeating other players","Thrives under pressure","Finds PvE less motivating"]},HC:{name:"Hyper-Casual Player",emoji:"😌",color:"#e65100",light:"#fff3e0",tagline:"I just want to relax and have easy fun.",description:"You play to unwind with zero stress and minimal decisions. Games are a way to de-stress, not a place to invest serious mental energy.",fit:"mo.co's Open Areas and casual content can suit you, but the game does ask you to build skill over time. The early experience may feel right, but deeper content might feel like too much work.",traits:["Plays to de-stress","Prefers low-friction content","Short sessions","Avoids demanding mechanics"]},NAR:{name:"Narrative Explorer",emoji:"📖",color:"#880e4f",light:"#fce4ec",tagline:"I'm here for the world and the story.",description:"You play for the story, the lore, and the characters. A rich world with depth and history keeps you invested.",fit:"mo.co's current vision deprioritizes narrative as a core pillar. There is world-building and character context, but if story is your primary hook you may want more depth than the game currently offers.",traits:["Story and lore driven","Cares about character backstory","Explores world context carefully","Values authored experiences"]},COL:{name:"Collector / Completionist",emoji:"🏆",color:"#006064",light:"#e0f7fa",tagline:"I want to collect everything and finish what I started.",description:"The checklist is the game for you. Completing every set, unlocking every item, and reaching 100% gives you deep satisfaction.",fit:"mo.co has collection mechanics, but the primary progression is built around skill mastery. You'll find things to collect, but the game won't always reward completionism as the main loop.",traits:["Completion-driven","Motivated by sets and milestones","Tracks progress carefully","Satisfaction comes from finishing everything"]},SOL:{name:"Solo Challenger",emoji:"🧗",color:"#4a148c",light:"#ede7f6",tagline:"I want the hardest challenge — but I'll do it alone.",description:"You love difficult content and the satisfaction of mastering it, but strictly on your own. Co-op dilutes the individual challenge. You want to know that YOU did it.",fit:"mo.co has solo content including Dojos and solo-playable areas. If co-op becomes mandatory for hard content, this could frustrate you.",traits:["High skill drive","Strongly prefers solo play","Rejects coordinated group content","Individual mastery over team outcomes"]}};
-
-var clusterOrder=["SD","EE","SA","PVP","HC","NAR","COL","SOL"];
-var TARGET=["SD","EE","SA"];
-var STORAGE_KEY="moco_survey_v1";
-var state={screen:"intro",current:0,answers:new Array(8).fill(null),selected:null,result:null,modTaps:0,modTapTimer:null};
-
-function saveResult(p){try{var d=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");d[p]=(d[p]||0)+1;localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){}}
-function loadResults(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");}catch(e){return {};}}
-
-function calcResult(answers){
-  var s={SD:0,EE:0,SA:0,PVP:0,HC:0,NAR:0,COL:0,SOL:0};
-  answers.forEach(function(a){if(a)Object.keys(a.scores).forEach(function(k){s[k]=(s[k]||0)+a.scores[k];});});
-  if(s.PVP>=3)return{primary:"PVP",secondary:null,scores:s};
-  var sorted=clusterOrder.filter(function(k){return k!=="PVP";}).map(function(k){return{key:k,val:s[k]};}).sort(function(a,b){return b.val-a.val;});
-  var top=sorted[0],sec=sorted[1];
-  var blend=top.val>0&&sec.val>0&&top.val-sec.val<=1;
-  return{primary:top.key,secondary:blend?sec.key:null,scores:s};
+function sbInsert(cluster, cb) {
+  fetch(SUPABASE_URL + "/rest/v1/" + TABLE, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    },
+    body: JSON.stringify({ cluster: cluster })
+  }).then(function(r) { cb(r.ok ? null : "insert error"); }).catch(function(e) { cb(e); });
 }
 
-function render(){
-  var app=document.getElementById("app");
-  if(state.screen==="mod"){app.innerHTML=renderMod();bindMod();return;}
-  if(state.screen==="intro"){app.innerHTML=renderIntro();bindIntro();return;}
-  if(state.screen==="survey"){app.innerHTML=renderSurvey();bindSurvey();return;}
-  if(state.screen==="result"){app.innerHTML=renderResult();bindResult();return;}
+function sbFetch(cb) {
+  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?select=cluster", {
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY
+    }
+  }).then(function(r) { return r.json(); }).then(function(rows) {
+    var counts = {};
+    rows.forEach(function(r) { counts[r.cluster] = (counts[r.cluster] || 0) + 1; });
+    cb(null, counts);
+  }).catch(function(e) { cb(e, {}); });
 }
 
-function renderIntro(){
-  return '<div class="center"><div class="wrap-center"><span class="emoji-tap" id="modTap">🎮</span><h1>What kind of mo.co player are you?</h1><p class="subtitle">8 quick questions. Find out which player profile fits you best and what it means for how mo.co is being designed.</p><button class="btn-primary" id="startBtn">Find My Player Profile</button><p class="hint">About 90 seconds. No login required.</p></div></div>';
+function sbDeleteAll(cb) {
+  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?cluster=neq.IMPOSSIBLE_VALUE_XYZ", {
+    method: "DELETE",
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Prefer": "return=minimal"
+    }
+  }).then(function(r) { cb(r.ok ? null : "delete error"); }).catch(function(e) { cb(e); });
 }
 
-function bindIntro(){
-  document.getElementById("startBtn").onclick=function(){state.screen="survey";state.current=0;state.answers=new Array(8).fill(null);state.selected=null;render();};
-  var taps=0,timer=null;
-  document.getElementById("modTap").onclick=function(){
-    taps++;clearTimeout(timer);
-    timer=setTimeout(function(){taps=0;},3000);
-    if(taps>=5){taps=0;state.screen="mod";render();}
+// ─── DATA ──────────────────────────────────────────────────────────
+var questions = [
+  { id:1, text:"When you start a mo.co session, what are you usually here for?", options:[
+    { label:"Just some fun — I want to play and unwind without thinking too hard", scores:{HC:1} },
+    { label:"To jump in and play — I enjoy the action whether others are around or not", scores:{SD:1} },
+    { label:"To try something new — a different weapon, mode, or build", scores:{EE:1} },
+    { label:"To push myself — I want to take on a challenge and get better", scores:{SA:1} },
+    { label:"To follow the story and explore the world", scores:{NAR:1} }
+  ]},
+  { id:2, text:"How do you feel about playing alongside other people in mo.co?", options:[
+    { label:"I love it — having lots of other players around makes it more fun and alive", scores:{SD:1} },
+    { label:"I enjoy it when it's relaxed — I don't want to feel like I'm letting anyone down", scores:{SD:0.5,EE:0.5} },
+    { label:"I'm fine either way — I stay focused on my own play regardless", scores:{SA:1} },
+    { label:"I mostly prefer playing completely alone, at my own pace", scores:{SOL:1,HC:0.5} }
+  ]},
+  { id:3, text:"Which of these feels most satisfying when it happens in mo.co?", options:[
+    { label:"Getting a cool new skin, cosmetic, or look for my character", scores:{EE:1} },
+    { label:"Beating a challenge I've failed at before", scores:{SA:1} },
+    { label:"Playing alongside other people and having a fun shared moment", scores:{SD:1} },
+    { label:"Discovering a new weapon, ability, or playstyle that suits me", scores:{EE:0.5,SA:0.5} },
+    { label:"Completing everything in a set or ticking off a milestone", scores:{COL:1} }
+  ]},
+  { id:4, text:"If mo.co added a mode where you fight directly against other players and try to beat them, how would you feel?", options:[
+    { label:"Excited — competing against real players and winning is what I enjoy most", scores:{PVP:3} },
+    { label:"Open to it — might be fun casually, but it's not what I play for", scores:{} },
+    { label:"Not really for me — I prefer the challenge to come from the game, not from players", scores:{SD:0.5,SA:0.5,EE:0.5} },
+    { label:"I'd avoid it — winning or losing against real people takes the fun out of it for me", scores:{SD:0.5,SA:0.5} }
+  ]},
+  { id:5, text:"When you lose or fail in mo.co, what do you usually do?", options:[
+    { label:"Try again right away — I want to figure out what went wrong", scores:{SA:1} },
+    { label:"Take a short break, then come back to it", scores:{SA:0.5,SD:0.5} },
+    { label:"Move on to something easier or more relaxed", scores:{SD:0.5,EE:0.5} },
+    { label:"I don't really engage with the harder content — I play at my own level", scores:{HC:1,NAR:0.5} }
+  ]},
+  { id:6, text:"What keeps you coming back to mo.co?", options:[
+    { label:"There's always something new to unlock or collect", scores:{EE:0.5,COL:0.5} },
+    { label:"I'm getting noticeably better and I can feel it", scores:{SA:1} },
+    { label:"It's fun to be playing alongside other people", scores:{SD:1} },
+    { label:"There's always fresh content, events, or new things to try", scores:{EE:0.5,SD:0.5} },
+    { label:"I want to complete everything and finish what I've started", scores:{COL:1} }
+  ]},
+  { id:7, text:"How important is it to you that your character looks unique and reflects your personal style?", options:[
+    { label:"Very important — it's a big part of why I play", scores:{EE:1} },
+    { label:"Somewhat important — I care, but it's not the main reason I'm here", scores:{EE:0.5,SD:0.5} },
+    { label:"Not very important — I focus more on gameplay or progression", scores:{SA:0.5,COL:0.5} },
+    { label:"I don't think about it — I play for other reasons entirely", scores:{HC:0.5,NAR:0.5,SOL:0.5} }
+  ]},
+  { id:8, text:"Which of these would make you most excited about an upcoming mo.co update?", options:[
+    { label:"New story, lore, or characters that expand the world", scores:{NAR:1} },
+    { label:"New cosmetics, skins, or ways to customize my look", scores:{EE:1} },
+    { label:"New hard challenges or tougher enemies to master", scores:{SA:1} },
+    { label:"A new season with fresh activities that are fun and easy to jump into", scores:{SD:1} },
+    { label:"New items, collections, or things to complete and unlock", scores:{COL:1} }
+  ]}
+];
+
+var profiles = {
+  SD:  { name:"Self-Directed Social",    emoji:"🔵", color:"#1a73e8", light:"#e8f0fe", tagline:"I can play how I want, but I'm never alone.",                    description:"You enjoy gaming on your own terms. You love the energy of co-op and having other players around, but you don't need scheduled sessions or coordination pressure. Drop-in, drop-out is your style.",                                                               fit:"mo.co is built for you. Open world areas, casual co-op Rifts, and drop-in events are designed around exactly how you like to play.",                                                      traits:["Loves co-op energy without obligation","Plays solo comfortably too","Motivated by fresh content and fun sessions","Social without being dependent"] },
+  EE:  { name:"Expressive Explorer",     emoji:"🟣", color:"#9c27b0", light:"#f3e5f5", tagline:"This game lets me show who I am, not just how good I am.",        description:"You care about how your character looks and what it says about you. Variety, self-expression, and discovering new playstyles are what keep you engaged. You want to be seen, just not judged on performance.",                                            fit:"mo.co's cosmetics, seasonal skins, and weapon variety are designed for you. PvE removes meta anxiety so you can experiment freely.",                                                     traits:["Identity-driven player","Loves cosmetics and customization","Explores new builds and modes often","Shares game content with others"] },
+  SA:  { name:"Skillful Achiever",        emoji:"🟢", color:"#2e7d32", light:"#e8f5e9", tagline:"I'm getting better — and it feels good, not stressful.",          description:"You play to improve. Figuring out what went wrong, mastering enemy patterns, and pushing yourself through harder content is genuinely satisfying. You don't need to beat anyone — you're competing with your past self.",                                 fit:"mo.co's twitchy gameplay, Nightmare Rifts, and Trophy Leagues give you a ceiling to chase. Skill is visible and rewarded here.",                                                         traits:["Improvement-focused","Retries difficult content to learn","Skill expression matters more than cosmetics","Values clear feedback on performance"] },
+  PVP: { name:"PvP Competitor",           emoji:"⚔️", color:"#c62828", light:"#ffebee", tagline:"Winning against real players is the real game.",                  description:"You're most motivated by direct competition — testing your skills against real opponents, climbing rankings, and winning head-to-head. The zero-sum nature of PvP is what gives the game stakes for you.",                                               fit:"mo.co is currently built around cooperative PvE rather than direct player competition. You might enjoy the challenge content, but the core loop may not fully satisfy this motivation.", traits:["Ranking and competition driven","Enjoys defeating other players","Thrives under pressure","Finds PvE less motivating"] },
+  HC:  { name:"Hyper-Casual Player",      emoji:"😌", color:"#e65100", light:"#fff3e0", tagline:"I just want to relax and have easy fun.",                          description:"You play to unwind with zero stress and minimal decisions. Games are a way to de-stress, not a place to invest serious mental energy.",                                                                                                                    fit:"mo.co's Open Areas and casual content can suit you, but the game does ask you to build skill over time. The early experience may feel right, but deeper content might feel like too much work.", traits:["Plays to de-stress","Prefers low-friction content","Short sessions","Avoids demanding mechanics"] },
+  NAR: { name:"Narrative Explorer",       emoji:"📖", color:"#880e4f", light:"#fce4ec", tagline:"I'm here for the world and the story.",                            description:"You play for the story, the lore, and the characters. A rich world with depth and history keeps you invested.",                                                                                                                                           fit:"mo.co's current vision deprioritizes narrative as a core pillar. There is world-building and character context, but if story is your primary hook you may want more depth than the game currently offers.", traits:["Story and lore driven","Cares about character backstory","Explores world context carefully","Values authored experiences"] },
+  COL: { name:"Collector / Completionist",emoji:"🏆", color:"#006064", light:"#e0f7fa", tagline:"I want to collect everything and finish what I started.",          description:"The checklist is the game for you. Completing every set, unlocking every item, and reaching 100% gives you deep satisfaction.",                                                                                                                          fit:"mo.co has collection mechanics, but the primary progression is built around skill mastery. You'll find things to collect, but the game won't always reward completionism as the main loop.", traits:["Completion-driven","Motivated by sets and milestones","Tracks progress carefully","Satisfaction comes from finishing everything"] },
+  SOL: { name:"Solo Challenger",          emoji:"🧗", color:"#4a148c", light:"#ede7f6", tagline:"I want the hardest challenge — but I'll do it alone.",             description:"You love difficult content and the satisfaction of mastering it, but strictly on your own. Co-op dilutes the individual challenge. You want to know that YOU did it.",                                                                                  fit:"mo.co has solo content including Dojos and solo-playable areas. If co-op becomes mandatory for hard content, this could frustrate you.",                                                  traits:["High skill drive","Strongly prefers solo play","Rejects coordinated group content","Individual mastery over team outcomes"] }
+};
+
+var clusterOrder = ["SD","EE","SA","PVP","HC","NAR","COL","SOL"];
+var TARGET = ["SD","EE","SA"];
+
+// ─── STATE ─────────────────────────────────────────────────────────
+var state = { screen:"intro", current:0, answers:new Array(8).fill(null), selected:null, result:null };
+var modInterval = null;
+var modTaps = 0, modTapTimer = null;
+
+// ─── SCORING ───────────────────────────────────────────────────────
+function calcResult(answers) {
+  var s = {SD:0,EE:0,SA:0,PVP:0,HC:0,NAR:0,COL:0,SOL:0};
+  answers.forEach(function(a) { if(a) Object.keys(a.scores).forEach(function(k) { s[k]=(s[k]||0)+a.scores[k]; }); });
+  if(s.PVP >= 3) return { primary:"PVP", secondary:null, scores:s };
+  var sorted = clusterOrder.filter(function(k){return k!=="PVP";}).map(function(k){return{key:k,val:s[k]};}).sort(function(a,b){return b.val-a.val;});
+  var top=sorted[0], sec=sorted[1];
+  var blend = top.val>0 && sec.val>0 && top.val-sec.val<=1;
+  return { primary:top.key, secondary:blend?sec.key:null, scores:s };
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────
+function render() {
+  var app = document.getElementById("app");
+  if(state.screen==="mod")    { app.innerHTML=renderMod();    bindMod();    startModRefresh(); return; }
+  if(state.screen==="intro")  { app.innerHTML=renderIntro();  bindIntro();  stopModRefresh();  return; }
+  if(state.screen==="survey") { app.innerHTML=renderSurvey(); bindSurvey(); stopModRefresh();  return; }
+  if(state.screen==="result") { app.innerHTML=renderResult(); bindResult(); stopModRefresh();  return; }
+}
+
+// ─── INTRO ─────────────────────────────────────────────────────────
+function renderIntro() {
+  return '<div class="center"><div class="wrap-center">'
+    +'<span class="emoji-tap" id="modTap">🎮</span>'
+    +'<h1>What kind of mo.co player are you?</h1>'
+    +'<p class="subtitle">8 quick questions. Find out which player profile fits you best and what it means for how mo.co is being designed.</p>'
+    +'<button class="btn-primary" id="startBtn">Find My Player Profile</button>'
+    +'<p class="hint">About 90 seconds. No login required.</p>'
+    +'</div></div>';
+}
+function bindIntro() {
+  document.getElementById("startBtn").onclick = function() {
+    state.screen="survey"; state.current=0; state.answers=new Array(8).fill(null); state.selected=null; render();
+  };
+  document.getElementById("modTap").onclick = function() {
+    modTaps++; clearTimeout(modTapTimer);
+    modTapTimer = setTimeout(function(){modTaps=0;}, 3000);
+    if(modTaps >= 5) { modTaps=0; state.screen="mod"; render(); }
   };
 }
 
-function renderSurvey(){
-  var q=questions[state.current];
-  var pct=Math.round((state.current/questions.length)*100);
-  var opts=q.options.map(function(o,i){
-    var sel=state.selected===o?" selected":"";
+// ─── SURVEY ────────────────────────────────────────────────────────
+function renderSurvey() {
+  var q = questions[state.current];
+  var pct = Math.round((state.current/questions.length)*100);
+  var opts = q.options.map(function(o,i) {
+    var sel = state.selected===o ? " selected" : "";
     return '<button class="opt-btn'+sel+'" data-idx="'+i+'">'+o.label+'</button>';
   }).join("");
-  var nextClass=state.selected?" active":"";
-  var nextLabel=state.current===questions.length-1?"See My Profile":"Next";
-  return '<div class="center"><div class="wrap"><div class="progress-row"><span class="progress-label">Question '+(state.current+1)+' of '+questions.length+'</span><span class="progress-label">'+pct+'%</span></div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:'+pct+'%"></div></div><h2>'+q.text+'</h2><div class="options" id="opts">'+opts+'</div><div class="nav-row"><button class="btn-back" id="backBtn">Back</button><button class="btn-next'+nextClass+'" id="nextBtn">'+nextLabel+'</button></div></div></div>';
+  var nc = state.selected ? " active" : "";
+  var nl = state.current===questions.length-1 ? "See My Profile" : "Next";
+  return '<div class="center"><div class="wrap">'
+    +'<div class="progress-row"><span class="progress-label">Question '+(state.current+1)+' of '+questions.length+'</span><span class="progress-label">'+pct+'%</span></div>'
+    +'<div class="progress-bar-bg"><div class="progress-bar-fill" style="width:'+pct+'%"></div></div>'
+    +'<h2>'+q.text+'</h2>'
+    +'<div class="options">'+opts+'</div>'
+    +'<div class="nav-row"><button class="btn-back" id="backBtn">Back</button><button class="btn-next'+nc+'" id="nextBtn">'+nl+'</button></div>'
+    +'</div></div>';
 }
-
-function bindSurvey(){
-  var q=questions[state.current];
-  document.querySelectorAll(".opt-btn").forEach(function(btn,i){
-    btn.onclick=function(){state.selected=q.options[i];render();};
+function bindSurvey() {
+  var q = questions[state.current];
+  document.querySelectorAll(".opt-btn").forEach(function(btn,i) {
+    btn.onclick = function() { state.selected=q.options[i]; render(); };
   });
-  document.getElementById("backBtn").onclick=function(){
+  document.getElementById("backBtn").onclick = function() {
     if(state.current===0){state.screen="intro";render();return;}
-    state.current--;state.selected=state.answers[state.current];render();
+    state.current--; state.selected=state.answers[state.current]; render();
   };
-  document.getElementById("nextBtn").onclick=function(){
-    if(!state.selected)return;
-    state.answers[state.current]=state.selected;
-    if(state.current<questions.length-1){state.current++;state.selected=state.answers[state.current]||null;render();}
-    else{state.result=calcResult(state.answers);saveResult(state.result.primary);state.screen="result";render();}
-  };
-}
-
-function renderResult(){
-  var r=state.result;
-  var p=profiles[r.primary];
-  var s=r.secondary?profiles[r.secondary]:null;
-  var topScores=clusterOrder.map(function(k){return{key:k,val:r.scores[k]||0,pr:profiles[k]};}).filter(function(x){return x.val>0;}).sort(function(a,b){return b.val-a.val;}).slice(0,4);
-
-  var secBlock="";
-  if(s){secBlock='<div class="secondary-card" style="border:2px solid '+s.color+'"><div class="secondary-label" style="color:'+s.color+'">You also have a strong secondary profile</div><div class="secondary-name-row"><span style="font-size:20px">'+s.emoji+'</span><span style="color:white;font-weight:700;font-size:16px">'+s.name+'</span></div><p>'+s.description+'</p></div>';}
-
-  var bars=topScores.map(function(x){return '<div class="bar-row"><span style="font-size:16px;min-width:24px">'+x.pr.emoji+'</span><span class="bar-name">'+x.pr.name+'</span><div class="bar-bg"><div class="bar-fill" style="background:'+x.pr.color+';width:'+Math.min(100,x.val/4*100)+'%"></div></div></div>';}).join("");
-  var breakdownBlock=topScores.length>1?'<div class="card"><div class="card-label">Your motivation breakdown</div>'+bars+'</div>':"";
-
-  return '<div style="min-height:100vh;background:#0f0f0f;padding:28px 20px;"><div class="wrap" style="margin:0 auto;"><div class="result-hero" style="background:'+p.color+'"><div class="big-emoji">'+p.emoji+'</div><div class="profile-label">'+(s?"Your Primary Profile":"Your Player Profile")+'</div><h2>'+p.name+'</h2><p class="tagline">"'+p.tagline+'"</p><p class="desc">'+p.description+'</p></div>'+secBlock+'<div class="card"><div class="card-label">How mo.co is built for you</div><p>'+p.fit+'</p></div><div class="card"><div class="card-label">Your player traits</div><div class="traits">'+p.traits.map(function(t){return'<span class="trait-tag" style="background:'+p.light+';color:'+p.color+'">'+t+'</span>';}).join("")+'</div></div>'+breakdownBlock+'<button class="btn-retake" id="retakeBtn">Retake Survey</button></div></div>';
-}
-
-function bindResult(){
-  document.getElementById("retakeBtn").onclick=function(){state.screen="intro";state.result=null;render();};
-}
-
-function renderMod(){
-  var data=loadResults();
-  var total=Object.values(data).reduce(function(a,b){return a+b;},0);
-  var maxVal=Math.max.apply(null,clusterOrder.map(function(k){return data[k]||0;}).concat([1]));
-
-  var rows=clusterOrder.map(function(k){
-    var pr=profiles[k];
-    var val=data[k]||0;
-    var pct=total>0?Math.round(val/total*100):0;
-    var barW=(val/maxVal*100).toFixed(1);
-    var isTarget=TARGET.indexOf(k)>-1;
-    return '<div class="mod-row"><div class="mod-row-top"><div class="mod-name-row"><span style="font-size:16px">'+pr.emoji+'</span><span class="mod-name '+(isTarget?"target":"other")+'">'+pr.name+'</span>'+(isTarget?'<span class="target-badge">TARGET</span>':"")+'</div><div class="mod-nums"><span class="mod-pct">'+pct+'%</span><span class="mod-val">'+val+'</span></div></div><div class="mod-bar-bg"><div class="mod-bar-fill" style="background:'+pr.color+';width:'+barW+'%"></div></div></div>';
-  }).join("");
-
-  var targetRows=TARGET.map(function(k){
-    var pr=profiles[k];
-    var val=data[k]||0;
-    var pct=total>0?Math.round(val/total*100):0;
-    return '<div class="target-row"><div class="target-row-name"><span style="font-size:16px">'+pr.emoji+'</span><span style="color:white">'+pr.name+'</span></div><div class="target-right"><div class="target-mini-bar-bg"><div class="target-mini-fill" style="background:'+pr.color+';width:'+pct+'%"></div></div><span class="target-pct" style="color:'+pr.color+'">'+pct+'%</span></div></div>';
-  }).join("");
-
-  var targetTotal=TARGET.reduce(function(a,k){return a+(data[k]||0);},0);
-  var targetPct=total>0?Math.round(targetTotal/total*100):0;
-  var targetSummary=total>0?'<div class="target-summary"><div class="target-summary-label">Target Cluster Share</div>'+targetRows+'<div class="target-total-row"><span class="target-total-label">Total in target clusters</span><span class="target-total-val">'+targetTotal+' / '+total+' ('+targetPct+'%)</span></div></div>':"";
-
-  return '<div class="mod-wrap"><div class="mod-header"><div><h1>Moderator Dashboard</h1><div class="mod-sub">Refreshes every 2 seconds</div></div><div class="mod-btns"><button class="btn-mod-back" id="modBackBtn">Back to Survey</button><button class="btn-mod-clear" id="modClearBtn">Reset Data</button></div></div><div class="mod-total"><div class="tot-label">Total Responses</div><div class="tot-num">'+total+'</div></div><div class="mod-card"><div class="mod-card-label">Results by Profile</div>'+rows+'</div>'+targetSummary+'</div>';
-}
-
-function bindMod(){
-  document.getElementById("modBackBtn").onclick=function(){state.screen="intro";render();};
-  document.getElementById("modClearBtn").onclick=function(){
-    if(confirm("Reset all survey data? This cannot be undone.")){
-      try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
+  document.getElementById("nextBtn").onclick = function() {
+    if(!state.selected) return;
+    state.answers[state.current] = state.selected;
+    if(state.current < questions.length-1) {
+      state.current++; state.selected=state.answers[state.current]||null; render();
+    } else {
+      state.result = calcResult(state.answers);
+      state.screen = "result";
+      sbInsert(state.result.primary, function(err) {
+        if(err) console.warn("Could not save result:", err);
+      });
       render();
     }
   };
 }
 
-var modInterval=null;
-function startModRefresh(){stopModRefresh();modInterval=setInterval(function(){if(state.screen==="mod")render();},2000);}
-function stopModRefresh(){if(modInterval){clearInterval(modInterval);modInterval=null;}}
+// ─── RESULT ────────────────────────────────────────────────────────
+function renderResult() {
+  var r=state.result, p=profiles[r.primary], s=r.secondary?profiles[r.secondary]:null;
+  var topScores = clusterOrder.map(function(k){return{key:k,val:r.scores[k]||0,pr:profiles[k]};}).filter(function(x){return x.val>0;}).sort(function(a,b){return b.val-a.val;}).slice(0,4);
+  var secBlock = s ? '<div class="secondary-card" style="border:2px solid '+s.color+'">'
+    +'<div class="secondary-label" style="color:'+s.color+'">You also have a strong secondary profile</div>'
+    +'<div class="secondary-name-row"><span style="font-size:20px">'+s.emoji+'</span><span style="color:white;font-weight:700;font-size:16px">'+s.name+'</span></div>'
+    +'<p>'+s.description+'</p></div>' : "";
+  var bars = topScores.map(function(x){
+    return '<div class="bar-row"><span style="font-size:16px;min-width:24px">'+x.pr.emoji+'</span>'
+      +'<span class="bar-name">'+x.pr.name+'</span>'
+      +'<div class="bar-bg"><div class="bar-fill" style="background:'+x.pr.color+';width:'+Math.min(100,x.val/4*100)+'%"></div></div></div>';
+  }).join("");
+  var breakdownBlock = topScores.length>1 ? '<div class="card"><div class="card-label">Your motivation breakdown</div>'+bars+'</div>' : "";
+  return '<div style="min-height:100vh;background:#0f0f0f;padding:28px 20px;">'
+    +'<div class="wrap" style="margin:0 auto;">'
+    +'<div class="result-hero" style="background:'+p.color+'">'
+    +'<div class="big-emoji">'+p.emoji+'</div>'
+    +'<div class="profile-label">'+(s?"Your Primary Profile":"Your Player Profile")+'</div>'
+    +'<h2>'+p.name+'</h2>'
+    +'<p class="tagline">"'+p.tagline+'"</p>'
+    +'<p class="desc">'+p.description+'</p></div>'
+    +secBlock
+    +'<div class="card"><div class="card-label">How mo.co is built for you</div><p>'+p.fit+'</p></div>'
+    +'<div class="card"><div class="card-label">Your player traits</div><div class="traits">'
+    +p.traits.map(function(t){return '<span class="trait-tag" style="background:'+p.light+';color:'+p.color+'">'+t+'</span>';}).join("")
+    +'</div></div>'
+    +breakdownBlock
+    +'<button class="btn-retake" id="retakeBtn">Retake Survey</button>'
+    +'</div></div>';
+}
+function bindResult() {
+  document.getElementById("retakeBtn").onclick = function() { state.screen="intro"; state.result=null; render(); };
+}
 
-(function(){
-  var _render=render;
-  render=function(){_render();if(state.screen==="mod")startModRefresh();else stopModRefresh();};
-  render();
-})();
+// ─── MODERATOR ─────────────────────────────────────────────────────
+function renderMod() {
+  return '<div class="mod-wrap" id="modContent"><div style="color:#888;font-size:14px;text-align:center;padding:60px 0;">Loading results...</div></div>';
+}
+
+function refreshModContent() {
+  sbFetch(function(err, data) {
+    var el = document.getElementById("modContent");
+    if(!el) return;
+    if(err) {
+      el.innerHTML = '<div style="color:#c62828;padding:20px;text-align:center;">Could not load results. Check your connection.</div>';
+      return;
+    }
+    var total = Object.values(data).reduce(function(a,b){return a+b;},0);
+    var maxVal = Math.max.apply(null, clusterOrder.map(function(k){return data[k]||0;}).concat([1]));
+
+    var rows = clusterOrder.map(function(k) {
+      var pr=profiles[k], val=data[k]||0;
+      var pct=total>0?Math.round(val/total*100):0;
+      var barW=(val/maxVal*100).toFixed(1);
+      var isTarget=TARGET.indexOf(k)>-1;
+      return '<div class="mod-row">'
+        +'<div class="mod-row-top">'
+        +'<div class="mod-name-row"><span style="font-size:16px">'+pr.emoji+'</span>'
+        +'<span class="mod-name '+(isTarget?"target":"other")+'">'+pr.name+'</span>'
+        +(isTarget?'<span class="target-badge">TARGET</span>':"")
+        +'</div>'
+        +'<div class="mod-nums"><span class="mod-pct">'+pct+'%</span><span class="mod-val">'+val+'</span></div>'
+        +'</div>'
+        +'<div class="mod-bar-bg"><div class="mod-bar-fill" style="background:'+pr.color+';width:'+barW+'%"></div></div>'
+        +'</div>';
+    }).join("");
+
+    var targetRows = TARGET.map(function(k) {
+      var pr=profiles[k], val=data[k]||0;
+      var pct=total>0?Math.round(val/total*100):0;
+      return '<div class="target-row">'
+        +'<div class="target-row-name"><span style="font-size:16px">'+pr.emoji+'</span><span style="color:white">'+pr.name+'</span></div>'
+        +'<div class="target-right">'
+        +'<div class="target-mini-bar-bg"><div class="target-mini-fill" style="background:'+pr.color+';width:'+pct+'%"></div></div>'
+        +'<span class="target-pct" style="color:'+pr.color+'">'+pct+'%</span>'
+        +'</div></div>';
+    }).join("");
+
+    var targetTotal = TARGET.reduce(function(a,k){return a+(data[k]||0);},0);
+    var targetPct = total>0?Math.round(targetTotal/total*100):0;
+    var targetSummary = '<div class="target-summary">'
+      +'<div class="target-summary-label">Target Cluster Share</div>'
+      +targetRows
+      +'<div class="target-total-row">'
+      +'<span class="target-total-label">Total in target clusters</span>'
+      +'<span class="target-total-val">'+targetTotal+' / '+total+' ('+targetPct+'%)</span>'
+      +'</div></div>';
+
+    el.innerHTML = '<div class="mod-header">'
+      +'<div><h1>Moderator Dashboard</h1>'
+      +'<div class="mod-sub"><span class="status-dot live"></span>Live — refreshes every 3 seconds</div></div>'
+      +'<div class="mod-btns">'
+      +'<button class="btn-mod-back" id="modBackBtn">Back to Survey</button>'
+      +'<button class="btn-mod-clear" id="modClearBtn">Reset All Data</button>'
+      +'</div></div>'
+      +'<div class="mod-total"><div class="tot-label">Total Responses</div><div class="tot-num">'+total+'</div></div>'
+      +'<div class="mod-card"><div class="mod-card-label">Results by Profile</div>'+rows+'</div>'
+      +(total>0?targetSummary:"");
+
+    document.getElementById("modBackBtn").onclick = function() { state.screen="intro"; render(); };
+    document.getElementById("modClearBtn").onclick = function() {
+      if(confirm("Reset all survey data? This cannot be undone.")) {
+        sbDeleteAll(function(err) {
+          if(err) alert("Could not reset data. Try again.");
+          else refreshModContent();
+        });
+      }
+    };
+  });
+}
+
+function bindMod() { refreshModContent(); }
+function startModRefresh() { stopModRefresh(); modInterval = setInterval(refreshModContent, 3000); }
+function stopModRefresh() { if(modInterval){clearInterval(modInterval);modInterval=null;} }
+
+// ─── BOOT ──────────────────────────────────────────────────────────
+render();
 </script>
 </body>
 </html>
