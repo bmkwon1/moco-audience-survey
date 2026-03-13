@@ -46,12 +46,15 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 .secondary-name-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .secondary-card p { color: #bbb; font-size: 13px; line-height: 1.5; }
 .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.bar-name { color: #ccc; font-size: 12px; min-width: 160px; }
+.bar-name { color: #ccc; font-size: 12px; min-width: 170px; }
 .bar-bg { flex: 1; background: #333; border-radius: 4px; height: 6px; }
 .bar-fill { height: 6px; border-radius: 4px; }
+.bar-val { color: #666; font-size: 11px; min-width: 32px; text-align: right; }
 .btn-retake { width: 100%; background: #1a1a1a; color: #aaa; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px; font-size: 14px; margin-top: 4px; }
 .btn-retake:hover { color: white; }
-.mod-wrap { max-width: 640px; margin: 0 auto; padding: 28px 20px; }
+
+/* MODERATOR */
+.mod-wrap { max-width: 680px; margin: 0 auto; padding: 28px 20px; }
 .mod-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
 .mod-header h1 { font-size: 20px; font-weight: 700; }
 .mod-sub { color: #666; font-size: 13px; margin-top: 4px; }
@@ -64,83 +67,80 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 .mod-total .tot-label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
 .mod-total .tot-num { font-size: 52px; font-weight: 700; }
 .mod-card { background: #1a1a1a; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-.mod-card-label { color: #888; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
-.mod-row { margin-bottom: 14px; }
-.mod-row-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.mod-card-label { color: #888; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.mod-card-sub { color: #555; font-size: 12px; margin-bottom: 18px; line-height: 1.5; }
+.mod-row { margin-bottom: 16px; }
+.mod-row-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .mod-name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.mod-name { font-size: 13px; }
+.mod-name { font-size: 14px; }
 .mod-name.target { color: white; font-weight: 700; }
 .mod-name.other { color: #888; }
 .target-badge { background: #1a3a1a; color: #4caf50; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
-.mod-nums { display: flex; gap: 12px; align-items: center; }
-.mod-pct { color: #888; font-size: 12px; }
-.mod-val { color: white; font-size: 15px; font-weight: 700; min-width: 24px; text-align: right; }
-.mod-bar-bg { background: #2a2a2a; border-radius: 4px; height: 8px; }
-.mod-bar-fill { height: 8px; border-radius: 4px; transition: width 0.4s ease; }
-.target-summary { background: #1a1a1a; border-radius: 12px; padding: 18px 20px; margin-bottom: 20px; }
-.target-summary-label { color: #888; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
-.target-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #2a2a2a; }
-.target-row-name { display: flex; align-items: center; gap: 8px; }
-.target-row-name span { font-size: 14px; font-weight: 600; }
-.target-right { display: flex; gap: 12px; align-items: center; }
-.target-mini-bar-bg { width: 100px; background: #2a2a2a; border-radius: 4px; height: 8px; }
-.target-mini-fill { height: 8px; border-radius: 4px; transition: width 0.4s; }
-.target-pct { font-size: 15px; font-weight: 700; min-width: 40px; text-align: right; }
-.target-total-row { display: flex; justify-content: space-between; padding-top: 12px; flex-wrap: wrap; gap: 4px; }
-.target-total-label { color: #888; font-size: 13px; }
-.target-total-val { color: white; font-size: 14px; font-weight: 700; }
-.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-.status-dot.live { background: #4caf50; }
-.status-dot.error { background: #c62828; }
+.mod-score-info { display: flex; gap: 14px; align-items: center; }
+.mod-avg { color: #aaa; font-size: 12px; }
+.mod-total-score { color: white; font-size: 15px; font-weight: 700; min-width: 40px; text-align: right; }
+.mod-bar-bg { background: #2a2a2a; border-radius: 4px; height: 10px; }
+.mod-bar-fill { height: 10px; border-radius: 4px; transition: width 0.5s ease; }
+.rank-label { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+.rank-1 { background: #1a2a1a; color: #66bb6a; }
+.rank-2 { background: #1a1a2a; color: #7986cb; }
+.rank-3 { background: #2a1a1a; color: #ef9a9a; }
+.group-hero { border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.group-hero-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.75; margin-bottom: 6px; }
+.group-hero h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.group-hero p { font-size: 13px; opacity: 0.85; line-height: 1.5; }
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; background: #4caf50; }
+.divider { border: none; border-top: 1px solid #2a2a2a; margin: 20px 0; }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-// ─── SUPABASE CONFIG ───────────────────────────────────────────────
 var SUPABASE_URL = "https://bmzdhimzybwprqhxingo.supabase.co";
 var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtemRoaW16eWJ3cHJxaHhpbmdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MDA2NTMsImV4cCI6MjA4ODk3NjY1M30.36qq3lSQT66j6hlGdMuwxSaQ3WJxyIUXmTS4Q-9j7i0";
 var TABLE = "responses";
-// ──────────────────────────────────────────────────────────────────
 
-function sbInsert(cluster, cb) {
+// Save full scores for every respondent
+function sbInsert(cluster, scores, cb) {
+  var payload = { cluster: cluster, sd: scores.SD||0, ee: scores.EE||0, sa: scores.SA||0, pvp: scores.PVP||0, hc: scores.HC||0, nar: scores.NAR||0, col: scores.COL||0, sol: scores.SOL||0 };
   fetch(SUPABASE_URL + "/rest/v1/" + TABLE, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "apikey": SUPABASE_KEY,
-      "Authorization": "Bearer " + SUPABASE_KEY,
-      "Prefer": "return=minimal"
-    },
-    body: JSON.stringify({ cluster: cluster })
-  }).then(function(r) { cb(r.ok ? null : "insert error"); }).catch(function(e) { cb(e); });
+    headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY, "Prefer": "return=minimal" },
+    body: JSON.stringify(payload)
+  }).then(function(r){ cb(r.ok?null:"insert error"); }).catch(function(e){ cb(e); });
 }
 
+// Fetch all rows and sum every score column
 function sbFetch(cb) {
-  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?select=cluster", {
-    headers: {
-      "apikey": SUPABASE_KEY,
-      "Authorization": "Bearer " + SUPABASE_KEY
-    }
-  }).then(function(r) { return r.json(); }).then(function(rows) {
-    var counts = {};
-    rows.forEach(function(r) { counts[r.cluster] = (counts[r.cluster] || 0) + 1; });
-    cb(null, counts);
-  }).catch(function(e) { cb(e, {}); });
+  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?select=cluster,sd,ee,sa,pvp,hc,nar,col,sol", {
+    headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY }
+  }).then(function(r){ return r.json(); }).then(function(rows){
+    var total = rows.length;
+    var topCounts = {};   // how many people's TOP cluster was X
+    var sumScores = { SD:0, EE:0, SA:0, PVP:0, HC:0, NAR:0, COL:0, SOL:0 };
+    rows.forEach(function(r){
+      topCounts[r.cluster] = (topCounts[r.cluster]||0) + 1;
+      sumScores.SD  += r.sd  || 0;
+      sumScores.EE  += r.ee  || 0;
+      sumScores.SA  += r.sa  || 0;
+      sumScores.PVP += r.pvp || 0;
+      sumScores.HC  += r.hc  || 0;
+      sumScores.NAR += r.nar || 0;
+      sumScores.COL += r.col || 0;
+      sumScores.SOL += r.sol || 0;
+    });
+    cb(null, { total: total, topCounts: topCounts, sumScores: sumScores });
+  }).catch(function(e){ cb(e, null); });
 }
 
 function sbDeleteAll(cb) {
-  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?cluster=neq.IMPOSSIBLE_VALUE_XYZ", {
+  fetch(SUPABASE_URL + "/rest/v1/" + TABLE + "?cluster=neq.IMPOSSIBLE_XYZ", {
     method: "DELETE",
-    headers: {
-      "apikey": SUPABASE_KEY,
-      "Authorization": "Bearer " + SUPABASE_KEY,
-      "Prefer": "return=minimal"
-    }
-  }).then(function(r) { cb(r.ok ? null : "delete error"); }).catch(function(e) { cb(e); });
+    headers: { "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY, "Prefer": "return=minimal" }
+  }).then(function(r){ cb(r.ok?null:"delete error"); }).catch(function(e){ cb(e); });
 }
 
-// ─── DATA ──────────────────────────────────────────────────────────
+// ── DATA ────────────────────────────────────────────────────────────
 var questions = [
   { id:1, text:"When you start a mo.co session, what are you usually here for?", options:[
     { label:"Just some fun — I want to play and unwind without thinking too hard", scores:{HC:1} },
@@ -197,45 +197,39 @@ var questions = [
 ];
 
 var profiles = {
-  SD:  { name:"Self-Directed Social",    emoji:"🔵", color:"#1a73e8", light:"#e8f0fe", tagline:"I can play how I want, but I'm never alone.",                    description:"You enjoy gaming on your own terms. You love the energy of co-op and having other players around, but you don't need scheduled sessions or coordination pressure. Drop-in, drop-out is your style.",                                                               fit:"mo.co is built for you. Open world areas, casual co-op Rifts, and drop-in events are designed around exactly how you like to play.",                                                      traits:["Loves co-op energy without obligation","Plays solo comfortably too","Motivated by fresh content and fun sessions","Social without being dependent"] },
-  EE:  { name:"Expressive Explorer",     emoji:"🟣", color:"#9c27b0", light:"#f3e5f5", tagline:"This game lets me show who I am, not just how good I am.",        description:"You care about how your character looks and what it says about you. Variety, self-expression, and discovering new playstyles are what keep you engaged. You want to be seen, just not judged on performance.",                                            fit:"mo.co's cosmetics, seasonal skins, and weapon variety are designed for you. PvE removes meta anxiety so you can experiment freely.",                                                     traits:["Identity-driven player","Loves cosmetics and customization","Explores new builds and modes often","Shares game content with others"] },
-  SA:  { name:"Skillful Achiever",        emoji:"🟢", color:"#2e7d32", light:"#e8f5e9", tagline:"I'm getting better — and it feels good, not stressful.",          description:"You play to improve. Figuring out what went wrong, mastering enemy patterns, and pushing yourself through harder content is genuinely satisfying. You don't need to beat anyone — you're competing with your past self.",                                 fit:"mo.co's twitchy gameplay, Nightmare Rifts, and Trophy Leagues give you a ceiling to chase. Skill is visible and rewarded here.",                                                         traits:["Improvement-focused","Retries difficult content to learn","Skill expression matters more than cosmetics","Values clear feedback on performance"] },
-  PVP: { name:"PvP Competitor",           emoji:"⚔️", color:"#c62828", light:"#ffebee", tagline:"Winning against real players is the real game.",                  description:"You're most motivated by direct competition — testing your skills against real opponents, climbing rankings, and winning head-to-head. The zero-sum nature of PvP is what gives the game stakes for you.",                                               fit:"mo.co is currently built around cooperative PvE rather than direct player competition. You might enjoy the challenge content, but the core loop may not fully satisfy this motivation.", traits:["Ranking and competition driven","Enjoys defeating other players","Thrives under pressure","Finds PvE less motivating"] },
-  HC:  { name:"Hyper-Casual Player",      emoji:"😌", color:"#e65100", light:"#fff3e0", tagline:"I just want to relax and have easy fun.",                          description:"You play to unwind with zero stress and minimal decisions. Games are a way to de-stress, not a place to invest serious mental energy.",                                                                                                                    fit:"mo.co's Open Areas and casual content can suit you, but the game does ask you to build skill over time. The early experience may feel right, but deeper content might feel like too much work.", traits:["Plays to de-stress","Prefers low-friction content","Short sessions","Avoids demanding mechanics"] },
-  NAR: { name:"Narrative Explorer",       emoji:"📖", color:"#880e4f", light:"#fce4ec", tagline:"I'm here for the world and the story.",                            description:"You play for the story, the lore, and the characters. A rich world with depth and history keeps you invested.",                                                                                                                                           fit:"mo.co's current vision deprioritizes narrative as a core pillar. There is world-building and character context, but if story is your primary hook you may want more depth than the game currently offers.", traits:["Story and lore driven","Cares about character backstory","Explores world context carefully","Values authored experiences"] },
-  COL: { name:"Collector / Completionist",emoji:"🏆", color:"#006064", light:"#e0f7fa", tagline:"I want to collect everything and finish what I started.",          description:"The checklist is the game for you. Completing every set, unlocking every item, and reaching 100% gives you deep satisfaction.",                                                                                                                          fit:"mo.co has collection mechanics, but the primary progression is built around skill mastery. You'll find things to collect, but the game won't always reward completionism as the main loop.", traits:["Completion-driven","Motivated by sets and milestones","Tracks progress carefully","Satisfaction comes from finishing everything"] },
-  SOL: { name:"Solo Challenger",          emoji:"🧗", color:"#4a148c", light:"#ede7f6", tagline:"I want the hardest challenge — but I'll do it alone.",             description:"You love difficult content and the satisfaction of mastering it, but strictly on your own. Co-op dilutes the individual challenge. You want to know that YOU did it.",                                                                                  fit:"mo.co has solo content including Dojos and solo-playable areas. If co-op becomes mandatory for hard content, this could frustrate you.",                                                  traits:["High skill drive","Strongly prefers solo play","Rejects coordinated group content","Individual mastery over team outcomes"] }
+  SD:  { name:"Self-Directed Social",     emoji:"🔵", color:"#1a73e8", light:"#e8f0fe", tagline:"I can play how I want, but I'm never alone.",               description:"You enjoy gaming on your own terms. You love the energy of co-op and having other players around, but you don't need scheduled sessions or coordination pressure. Drop-in, drop-out is your style.", fit:"mo.co is built for you. Open world areas, casual co-op Rifts, and drop-in events are designed around exactly how you like to play.", traits:["Loves co-op energy without obligation","Plays solo comfortably too","Motivated by fresh content and fun sessions","Social without being dependent"] },
+  EE:  { name:"Expressive Explorer",      emoji:"🟣", color:"#9c27b0", light:"#f3e5f5", tagline:"This game lets me show who I am, not just how good I am.",   description:"You care about how your character looks and what it says about you. Variety, self-expression, and discovering new playstyles are what keep you engaged. You want to be seen, just not judged on performance.", fit:"mo.co's cosmetics, seasonal skins, and weapon variety are designed for you. PvE removes meta anxiety so you can experiment freely.", traits:["Identity-driven player","Loves cosmetics and customization","Explores new builds and modes often","Shares game content with others"] },
+  SA:  { name:"Skillful Achiever",         emoji:"🟢", color:"#2e7d32", light:"#e8f5e9", tagline:"I'm getting better — and it feels good, not stressful.",    description:"You play to improve. Figuring out what went wrong, mastering enemy patterns, and pushing yourself through harder content is genuinely satisfying. You don't need to beat anyone — you're competing with your past self.", fit:"mo.co's twitchy gameplay, Nightmare Rifts, and Trophy Leagues give you a ceiling to chase. Skill is visible and rewarded here.", traits:["Improvement-focused","Retries difficult content to learn","Skill expression matters more than cosmetics","Values clear feedback on performance"] },
+  PVP: { name:"PvP Competitor",            emoji:"⚔️", color:"#c62828", light:"#ffebee", tagline:"Winning against real players is the real game.",             description:"You're most motivated by direct competition — testing your skills against real opponents, climbing rankings, and winning head-to-head.", fit:"mo.co is currently built around cooperative PvE rather than direct player competition. You might enjoy the challenge content, but the core loop may not fully satisfy this motivation.", traits:["Ranking and competition driven","Enjoys defeating other players","Thrives under pressure","Finds PvE less motivating"] },
+  HC:  { name:"Hyper-Casual Player",       emoji:"😌", color:"#e65100", light:"#fff3e0", tagline:"I just want to relax and have easy fun.",                    description:"You play to unwind with zero stress and minimal decisions. Games are a way to de-stress, not a place to invest serious mental energy.", fit:"mo.co's Open Areas and casual content can suit you, but the game does ask you to build skill over time.", traits:["Plays to de-stress","Prefers low-friction content","Short sessions","Avoids demanding mechanics"] },
+  NAR: { name:"Narrative Explorer",        emoji:"📖", color:"#880e4f", light:"#fce4ec", tagline:"I'm here for the world and the story.",                      description:"You play for the story, the lore, and the characters. A rich world with depth and history keeps you invested.", fit:"mo.co's current vision deprioritizes narrative as a core pillar. There is world-building and character context, but if story is your primary hook you may want more depth than the game currently offers.", traits:["Story and lore driven","Cares about character backstory","Explores world context carefully","Values authored experiences"] },
+  COL: { name:"Collector / Completionist", emoji:"🏆", color:"#006064", light:"#e0f7fa", tagline:"I want to collect everything and finish what I started.",    description:"The checklist is the game for you. Completing every set, unlocking every item, and reaching 100% gives you deep satisfaction.", fit:"mo.co has collection mechanics, but the primary progression is built around skill mastery.", traits:["Completion-driven","Motivated by sets and milestones","Tracks progress carefully","Satisfaction comes from finishing everything"] },
+  SOL: { name:"Solo Challenger",           emoji:"🧗", color:"#4a148c", light:"#ede7f6", tagline:"I want the hardest challenge — but I'll do it alone.",       description:"You love difficult content and the satisfaction of mastering it, but strictly on your own. Co-op dilutes the individual challenge.", fit:"mo.co has solo content including Dojos and solo-playable areas. If co-op becomes mandatory for hard content, this could frustrate you.", traits:["High skill drive","Strongly prefers solo play","Rejects coordinated group content","Individual mastery over team outcomes"] }
 };
 
 var clusterOrder = ["SD","EE","SA","PVP","HC","NAR","COL","SOL"];
 var TARGET = ["SD","EE","SA"];
-
-// ─── STATE ─────────────────────────────────────────────────────────
 var state = { screen:"intro", current:0, answers:new Array(8).fill(null), selected:null, result:null };
-var modInterval = null;
-var modTaps = 0, modTapTimer = null;
+var modInterval = null, modTaps = 0, modTapTimer = null;
 
-// ─── SCORING ───────────────────────────────────────────────────────
 function calcResult(answers) {
   var s = {SD:0,EE:0,SA:0,PVP:0,HC:0,NAR:0,COL:0,SOL:0};
-  answers.forEach(function(a) { if(a) Object.keys(a.scores).forEach(function(k) { s[k]=(s[k]||0)+a.scores[k]; }); });
-  if(s.PVP >= 3) return { primary:"PVP", secondary:null, scores:s };
+  answers.forEach(function(a){ if(a) Object.keys(a.scores).forEach(function(k){ s[k]=(s[k]||0)+a.scores[k]; }); });
+  if(s.PVP>=3) return { primary:"PVP", secondary:null, tertiary:null, scores:s };
   var sorted = clusterOrder.filter(function(k){return k!=="PVP";}).map(function(k){return{key:k,val:s[k]};}).sort(function(a,b){return b.val-a.val;});
-  var top=sorted[0], sec=sorted[1];
+  var top=sorted[0], sec=sorted[1], tert=sorted[2];
   var blend = top.val>0 && sec.val>0 && top.val-sec.val<=1;
-  return { primary:top.key, secondary:blend?sec.key:null, scores:s };
+  return { primary:top.key, secondary:(sec.val>0?sec.key:null), tertiary:(tert&&tert.val>0?tert.key:null), scores:s };
 }
 
-// ─── RENDER ────────────────────────────────────────────────────────
 function render() {
-  var app = document.getElementById("app");
+  var app=document.getElementById("app");
   if(state.screen==="mod")    { app.innerHTML=renderMod();    bindMod();    startModRefresh(); return; }
   if(state.screen==="intro")  { app.innerHTML=renderIntro();  bindIntro();  stopModRefresh();  return; }
   if(state.screen==="survey") { app.innerHTML=renderSurvey(); bindSurvey(); stopModRefresh();  return; }
   if(state.screen==="result") { app.innerHTML=renderResult(); bindResult(); stopModRefresh();  return; }
 }
 
-// ─── INTRO ─────────────────────────────────────────────────────────
 function renderIntro() {
   return '<div class="center"><div class="wrap-center">'
     +'<span class="emoji-tap" id="modTap">🎮</span>'
@@ -246,26 +240,25 @@ function renderIntro() {
     +'</div></div>';
 }
 function bindIntro() {
-  document.getElementById("startBtn").onclick = function() {
+  document.getElementById("startBtn").onclick = function(){
     state.screen="survey"; state.current=0; state.answers=new Array(8).fill(null); state.selected=null; render();
   };
-  document.getElementById("modTap").onclick = function() {
+  document.getElementById("modTap").onclick = function(){
     modTaps++; clearTimeout(modTapTimer);
-    modTapTimer = setTimeout(function(){modTaps=0;}, 3000);
-    if(modTaps >= 5) { modTaps=0; state.screen="mod"; render(); }
+    modTapTimer = setTimeout(function(){modTaps=0;},3000);
+    if(modTaps>=5){modTaps=0; state.screen="mod"; render();}
   };
 }
 
-// ─── SURVEY ────────────────────────────────────────────────────────
 function renderSurvey() {
-  var q = questions[state.current];
-  var pct = Math.round((state.current/questions.length)*100);
-  var opts = q.options.map(function(o,i) {
-    var sel = state.selected===o ? " selected" : "";
+  var q=questions[state.current];
+  var pct=Math.round((state.current/questions.length)*100);
+  var opts=q.options.map(function(o,i){
+    var sel=state.selected===o?" selected":"";
     return '<button class="opt-btn'+sel+'" data-idx="'+i+'">'+o.label+'</button>';
   }).join("");
-  var nc = state.selected ? " active" : "";
-  var nl = state.current===questions.length-1 ? "See My Profile" : "Next";
+  var nc=state.selected?" active":"";
+  var nl=state.current===questions.length-1?"See My Profile":"Next";
   return '<div class="center"><div class="wrap">'
     +'<div class="progress-row"><span class="progress-label">Question '+(state.current+1)+' of '+questions.length+'</span><span class="progress-label">'+pct+'%</span></div>'
     +'<div class="progress-bar-bg"><div class="progress-bar-fill" style="width:'+pct+'%"></div></div>'
@@ -275,135 +268,201 @@ function renderSurvey() {
     +'</div></div>';
 }
 function bindSurvey() {
-  var q = questions[state.current];
-  document.querySelectorAll(".opt-btn").forEach(function(btn,i) {
-    btn.onclick = function() { state.selected=q.options[i]; render(); };
+  var q=questions[state.current];
+  document.querySelectorAll(".opt-btn").forEach(function(btn,i){
+    btn.onclick=function(){state.selected=q.options[i]; render();};
   });
-  document.getElementById("backBtn").onclick = function() {
+  document.getElementById("backBtn").onclick=function(){
     if(state.current===0){state.screen="intro";render();return;}
     state.current--; state.selected=state.answers[state.current]; render();
   };
-  document.getElementById("nextBtn").onclick = function() {
+  document.getElementById("nextBtn").onclick=function(){
     if(!state.selected) return;
-    state.answers[state.current] = state.selected;
-    if(state.current < questions.length-1) {
+    state.answers[state.current]=state.selected;
+    if(state.current<questions.length-1){
       state.current++; state.selected=state.answers[state.current]||null; render();
     } else {
-      state.result = calcResult(state.answers);
-      state.screen = "result";
-      sbInsert(state.result.primary, function(err) {
-        if(err) console.warn("Could not save result:", err);
+      state.result=calcResult(state.answers);
+      state.screen="result";
+      sbInsert(state.result.primary, state.result.scores, function(err){
+        if(err) console.warn("Save error:",err);
       });
       render();
     }
   };
 }
 
-// ─── RESULT ────────────────────────────────────────────────────────
 function renderResult() {
-  var r=state.result, p=profiles[r.primary], s=r.secondary?profiles[r.secondary]:null;
-  var topScores = clusterOrder.map(function(k){return{key:k,val:r.scores[k]||0,pr:profiles[k]};}).filter(function(x){return x.val>0;}).sort(function(a,b){return b.val-a.val;}).slice(0,4);
+  var r=state.result, p=profiles[r.primary];
+  var s=r.secondary?profiles[r.secondary]:null;
+  var t=r.tertiary?profiles[r.tertiary]:null;
+  var allScores = clusterOrder.map(function(k){return{key:k,val:r.scores[k]||0,pr:profiles[k]};}).filter(function(x){return x.val>0;}).sort(function(a,b){return b.val-a.val;});
+  var maxScore = allScores.length>0?allScores[0].val:1;
+
   var secBlock = s ? '<div class="secondary-card" style="border:2px solid '+s.color+'">'
-    +'<div class="secondary-label" style="color:'+s.color+'">You also have a strong secondary profile</div>'
+    +'<div class="secondary-label" style="color:'+s.color+'">Strong secondary profile</div>'
     +'<div class="secondary-name-row"><span style="font-size:20px">'+s.emoji+'</span><span style="color:white;font-weight:700;font-size:16px">'+s.name+'</span></div>'
     +'<p>'+s.description+'</p></div>' : "";
-  var bars = topScores.map(function(x){
-    return '<div class="bar-row"><span style="font-size:16px;min-width:24px">'+x.pr.emoji+'</span>'
+
+  var tertBlock = t ? '<div class="secondary-card" style="border:1px solid '+t.color+';opacity:0.85">'
+    +'<div class="secondary-label" style="color:'+t.color+'">Notable tertiary motivation</div>'
+    +'<div class="secondary-name-row"><span style="font-size:20px">'+t.emoji+'</span><span style="color:white;font-weight:700;font-size:16px">'+t.name+'</span></div>'
+    +'<p>'+t.description+'</p></div>' : "";
+
+  var bars = allScores.map(function(x){
+    var w = Math.min(100, (x.val/maxScore)*100).toFixed(1);
+    return '<div class="bar-row">'
+      +'<span style="font-size:16px;min-width:24px">'+x.pr.emoji+'</span>'
       +'<span class="bar-name">'+x.pr.name+'</span>'
-      +'<div class="bar-bg"><div class="bar-fill" style="background:'+x.pr.color+';width:'+Math.min(100,x.val/4*100)+'%"></div></div></div>';
+      +'<div class="bar-bg"><div class="bar-fill" style="background:'+x.pr.color+';width:'+w+'%"></div></div>'
+      +'<span class="bar-val">'+x.val.toFixed(1)+'</span>'
+      +'</div>';
   }).join("");
-  var breakdownBlock = topScores.length>1 ? '<div class="card"><div class="card-label">Your motivation breakdown</div>'+bars+'</div>' : "";
+
   return '<div style="min-height:100vh;background:#0f0f0f;padding:28px 20px;">'
     +'<div class="wrap" style="margin:0 auto;">'
     +'<div class="result-hero" style="background:'+p.color+'">'
     +'<div class="big-emoji">'+p.emoji+'</div>'
-    +'<div class="profile-label">'+(s?"Your Primary Profile":"Your Player Profile")+'</div>'
+    +'<div class="profile-label">Your Primary Profile</div>'
     +'<h2>'+p.name+'</h2>'
     +'<p class="tagline">"'+p.tagline+'"</p>'
     +'<p class="desc">'+p.description+'</p></div>'
-    +secBlock
+    +secBlock+tertBlock
     +'<div class="card"><div class="card-label">How mo.co is built for you</div><p>'+p.fit+'</p></div>'
     +'<div class="card"><div class="card-label">Your player traits</div><div class="traits">'
     +p.traits.map(function(t){return '<span class="trait-tag" style="background:'+p.light+';color:'+p.color+'">'+t+'</span>';}).join("")
     +'</div></div>'
-    +breakdownBlock
+    +(allScores.length>1?'<div class="card"><div class="card-label">Your full motivation breakdown</div>'+bars+'</div>':"")
     +'<button class="btn-retake" id="retakeBtn">Retake Survey</button>'
     +'</div></div>';
 }
-function bindResult() {
-  document.getElementById("retakeBtn").onclick = function() { state.screen="intro"; state.result=null; render(); };
+function bindResult(){
+  document.getElementById("retakeBtn").onclick=function(){state.screen="intro";state.result=null;render();};
 }
 
-// ─── MODERATOR ─────────────────────────────────────────────────────
+// ── MODERATOR ───────────────────────────────────────────────────────
 function renderMod() {
-  return '<div class="mod-wrap" id="modContent"><div style="color:#888;font-size:14px;text-align:center;padding:60px 0;">Loading results...</div></div>';
+  return '<div class="mod-wrap" id="modContent">'
+    +'<div style="color:#888;font-size:14px;text-align:center;padding:60px 0;">Loading results...</div>'
+    +'</div>';
 }
+function bindMod() { refreshModContent(); }
 
 function refreshModContent() {
   sbFetch(function(err, data) {
-    var el = document.getElementById("modContent");
+    var el=document.getElementById("modContent");
     if(!el) return;
-    if(err) {
-      el.innerHTML = '<div style="color:#c62828;padding:20px;text-align:center;">Could not load results. Check your connection.</div>';
+    if(err||!data) {
+      el.innerHTML='<div style="color:#c62828;padding:20px;text-align:center;">Could not load results. Check your connection.</div>';
       return;
     }
-    var total = Object.values(data).reduce(function(a,b){return a+b;},0);
-    var maxVal = Math.max.apply(null, clusterOrder.map(function(k){return data[k]||0;}).concat([1]));
 
-    var rows = clusterOrder.map(function(k) {
-      var pr=profiles[k], val=data[k]||0;
-      var pct=total>0?Math.round(val/total*100):0;
-      var barW=(val/maxVal*100).toFixed(1);
-      var isTarget=TARGET.indexOf(k)>-1;
+    var total=data.total;
+    var topCounts=data.topCounts;
+    var sumScores=data.sumScores;
+
+    // Sort all 8 clusters by aggregated score descending
+    var sorted = clusterOrder.map(function(k){
+      return { key:k, sum:sumScores[k]||0, avg:total>0?(sumScores[k]||0)/total:0, pr:profiles[k] };
+    }).sort(function(a,b){return b.sum-a.sum;});
+
+    var maxSum = sorted.length>0 && sorted[0].sum>0 ? sorted[0].sum : 1;
+
+    // Group motivation profile summary (top 3 by aggregate score)
+    var groupTop = sorted[0], groupSec = sorted[1], groupTert = sorted[2];
+
+    var groupHero = total>0 ? (
+      '<div class="group-hero" style="background:'+groupTop.pr.color+'">'
+      +'<div class="group-hero-label">Group\'s Dominant Motivation</div>'
+      +'<h2>'+groupTop.pr.emoji+' '+groupTop.pr.name+'</h2>'
+      +'<p>"'+groupTop.pr.tagline+'"</p>'
+      +'</div>'
+      +'<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">'
+      +'<div style="flex:1;min-width:140px;background:#1a1a1a;border-radius:10px;padding:14px;border-left:3px solid '+groupSec.pr.color+'">'
+      +'<div style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Secondary</div>'
+      +'<div style="font-size:14px;font-weight:700;">'+groupSec.pr.emoji+' '+groupSec.pr.name+'</div>'
+      +'</div>'
+      +'<div style="flex:1;min-width:140px;background:#1a1a1a;border-radius:10px;padding:14px;border-left:3px solid '+groupTert.pr.color+'">'
+      +'<div style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Tertiary</div>'
+      +'<div style="font-size:14px;font-weight:700;">'+groupTert.pr.emoji+' '+groupTert.pr.name+'</div>'
+      +'</div>'
+      +'</div>'
+    ) : "";
+
+    // Full aggregated score bars
+    var bars = sorted.map(function(item, idx) {
+      var pr=item.pr;
+      var barW=((item.sum/maxSum)*100).toFixed(1);
+      var isTarget=TARGET.indexOf(item.key)>-1;
+      var topCount=topCounts[item.key]||0;
+      var topPct=total>0?Math.round(topCount/total*100):0;
+      var rankLabel="";
+      if(idx===0) rankLabel='<span class="rank-label rank-1">1st</span>';
+      else if(idx===1) rankLabel='<span class="rank-label rank-2">2nd</span>';
+      else if(idx===2) rankLabel='<span class="rank-label rank-3">3rd</span>';
+
       return '<div class="mod-row">'
         +'<div class="mod-row-top">'
-        +'<div class="mod-name-row"><span style="font-size:16px">'+pr.emoji+'</span>'
+        +'<div class="mod-name-row">'
+        +'<span style="font-size:16px">'+pr.emoji+'</span>'
         +'<span class="mod-name '+(isTarget?"target":"other")+'">'+pr.name+'</span>'
         +(isTarget?'<span class="target-badge">TARGET</span>':"")
+        +rankLabel
         +'</div>'
-        +'<div class="mod-nums"><span class="mod-pct">'+pct+'%</span><span class="mod-val">'+val+'</span></div>'
+        +'<div class="mod-score-info">'
+        +'<span class="mod-avg">avg '+item.avg.toFixed(2)+' | #1 for '+topCount+' people ('+topPct+'%)</span>'
+        +'<span class="mod-total-score">'+item.sum.toFixed(1)+'</span>'
+        +'</div>'
         +'</div>'
         +'<div class="mod-bar-bg"><div class="mod-bar-fill" style="background:'+pr.color+';width:'+barW+'%"></div></div>'
         +'</div>';
     }).join("");
 
-    var targetRows = TARGET.map(function(k) {
-      var pr=profiles[k], val=data[k]||0;
-      var pct=total>0?Math.round(val/total*100):0;
-      return '<div class="target-row">'
-        +'<div class="target-row-name"><span style="font-size:16px">'+pr.emoji+'</span><span style="color:white">'+pr.name+'</span></div>'
-        +'<div class="target-right">'
-        +'<div class="target-mini-bar-bg"><div class="target-mini-fill" style="background:'+pr.color+';width:'+pct+'%"></div></div>'
-        +'<span class="target-pct" style="color:'+pr.color+'">'+pct+'%</span>'
+    // Target cluster breakdown
+    var targetRows = TARGET.map(function(k){
+      var pr=profiles[k];
+      var item=sorted.filter(function(x){return x.key===k;})[0];
+      var topCount=topCounts[k]||0;
+      var topPct=total>0?Math.round(topCount/total*100):0;
+      var scoreShare=total>0?(item.sum/Object.values(sumScores).reduce(function(a,b){return a+b;},0.001)*100).toFixed(1):0;
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2a2a2a;flex-wrap:wrap;gap:6px;">'
+        +'<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:16px">'+pr.emoji+'</span><span style="color:white;font-weight:600;font-size:14px">'+pr.name+'</span></div>'
+        +'<div style="display:flex;gap:20px;align-items:center;">'
+        +'<div style="text-align:center;"><div style="color:'+pr.color+';font-size:18px;font-weight:700;">'+topPct+'%</div><div style="color:#666;font-size:10px;">top cluster</div></div>'
+        +'<div style="text-align:center;"><div style="color:white;font-size:18px;font-weight:700;">'+scoreShare+'%</div><div style="color:#666;font-size:10px;">of total motivation</div></div>'
         +'</div></div>';
     }).join("");
 
-    var targetTotal = TARGET.reduce(function(a,k){return a+(data[k]||0);},0);
-    var targetPct = total>0?Math.round(targetTotal/total*100):0;
-    var targetSummary = '<div class="target-summary">'
-      +'<div class="target-summary-label">Target Cluster Share</div>'
-      +targetRows
-      +'<div class="target-total-row">'
-      +'<span class="target-total-label">Total in target clusters</span>'
-      +'<span class="target-total-val">'+targetTotal+' / '+total+' ('+targetPct+'%)</span>'
-      +'</div></div>';
-
     el.innerHTML = '<div class="mod-header">'
-      +'<div><h1>Moderator Dashboard</h1>'
-      +'<div class="mod-sub"><span class="status-dot live"></span>Live — refreshes every 3 seconds</div></div>'
+      +'<div><h1>Moderator Dashboard</h1><div class="mod-sub"><span class="status-dot"></span>Live — refreshes every 3 seconds</div></div>'
       +'<div class="mod-btns">'
       +'<button class="btn-mod-back" id="modBackBtn">Back to Survey</button>'
       +'<button class="btn-mod-clear" id="modClearBtn">Reset All Data</button>'
       +'</div></div>'
-      +'<div class="mod-total"><div class="tot-label">Total Responses</div><div class="tot-num">'+total+'</div></div>'
-      +'<div class="mod-card"><div class="mod-card-label">Results by Profile</div>'+rows+'</div>'
-      +(total>0?targetSummary:"");
 
-    document.getElementById("modBackBtn").onclick = function() { state.screen="intro"; render(); };
-    document.getElementById("modClearBtn").onclick = function() {
-      if(confirm("Reset all survey data? This cannot be undone.")) {
-        sbDeleteAll(function(err) {
-          if(err) alert("Could not reset data. Try again.");
+      +'<div class="mod-total"><div class="tot-label">Total Responses</div><div class="tot-num">'+total+'</div></div>'
+
+      + (total>0 ? groupHero : "")
+
+      +(total>0?
+        '<div class="mod-card">'
+        +'<div class="mod-card-label">Full Group Motivation Landscape</div>'
+        +'<div class="mod-card-sub">Scores are the sum of every person\'s raw motivation score for each cluster — not just who came first. A high bar means this motivation is strongly present across the group, even for people whose primary cluster is different.</div>'
+        +bars+'</div>'
+      :"")
+
+      +(total>0?
+        '<div class="mod-card">'
+        +'<div class="mod-card-label">Target Cluster Breakdown</div>'
+        +'<div class="mod-card-sub">Two views per cluster: % of people who landed here as their top profile, and % share of total group motivation score.</div>'
+        +targetRows+'</div>'
+      :"");
+
+    document.getElementById("modBackBtn").onclick=function(){state.screen="intro";render();};
+    document.getElementById("modClearBtn").onclick=function(){
+      if(confirm("Reset all survey data? This cannot be undone.")){
+        sbDeleteAll(function(err){
+          if(err) alert("Could not reset. Try again.");
           else refreshModContent();
         });
       }
@@ -411,11 +470,9 @@ function refreshModContent() {
   });
 }
 
-function bindMod() { refreshModContent(); }
-function startModRefresh() { stopModRefresh(); modInterval = setInterval(refreshModContent, 3000); }
-function stopModRefresh() { if(modInterval){clearInterval(modInterval);modInterval=null;} }
+function startModRefresh(){ stopModRefresh(); modInterval=setInterval(refreshModContent,3000); }
+function stopModRefresh(){ if(modInterval){clearInterval(modInterval);modInterval=null;} }
 
-// ─── BOOT ──────────────────────────────────────────────────────────
 render();
 </script>
 </body>
