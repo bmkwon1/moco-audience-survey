@@ -10,7 +10,7 @@ html,body{width:100%;height:100%;overflow:hidden}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f0ee;display:flex;flex-direction:column;align-items:center}
 
 /* SCALING — everything is built for 1120×620 then scaled to fit viewport */
-#shell{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+#shell{width:100vw;height:100vh;display:block;position:relative;overflow:hidden;background:#f0f0ee}
 #scaler{width:1120px;height:700px;transform-origin:top center;display:flex;flex-direction:column;align-items:center}
 
 #nav{width:100%;display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
@@ -63,7 +63,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tag-sa{background:#e6f4ec;color:#1a7a4a;border-color:#b3d9c3}
 .tag-n{background:#f5f5f3;color:#555;border-color:#ddd}
 .market-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;background:#f7f7f5;border:1px solid #e5e5e2;border-radius:5px;margin:2px;color:#333}
-.payoff-box{border-radius:0 7px 7px 0;padding:11px 14px;font-size:12.5px;font-style:italic;color:#333;line-height:1.55;border-left:3px solid;flex-shrink:0}
+.payoff-box{border-radius:0 7px 7px 0;padding:11px 14px;font-size:12.5px;font-style:italic;color:#333 !important;line-height:1.55;border-left:3px solid;flex-shrink:0}
+.payoff-box *{color:#333 !important}
 .info-card{background:#fafafa;border:1px solid #ebebeb;border-radius:7px;padding:11px 14px}
 .card-title{font-size:15px;font-weight:600;color:#111;margin-bottom:4px}
 .card-body{font-size:14px;color:#555;line-height:1.55}
@@ -316,6 +317,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         </div>
         <div style="margin-top:9px;font-size:11.5px;color:#666;line-height:1.5">Design is their defining motivation. * Quantic Foundry describes high Design scorers as players who "want to actively express their individuality in the game worlds they find themselves in." Community is instrumental — cosmetics only have meaning if others observe them.</div>
       </div>
+      <div class="block"><div class="sec-head">Key emotional payoff</div><div class="payoff-box" style="background:#f8f0fd;border-color:#7c3aad">"When I log in, I'm working on something that's mine. Other players see it. It matters."</div></div>
     </div>
   </div>
 </div>
@@ -663,8 +665,13 @@ function scalePresentation(){
   const s=document.getElementById('scaler');
   const sw=window.innerWidth, sh=window.innerHeight;
   const scale=Math.min(sw/1120, sh/700);
+  const scaledH = 700*scale;
+  const scaledW = 1120*scale;
   s.style.transform=`scale(${scale})`;
-  s.style.marginTop=`${(sh - 700*scale)/2}px`;
+  s.style.transformOrigin='top left';
+  s.style.position='absolute';
+  s.style.left=Math.round((sw-scaledW)/2)+'px';
+  s.style.top=Math.round((sh-scaledH)/2)+'px';
 }
 scalePresentation();
 window.addEventListener('resize', scalePresentation);
