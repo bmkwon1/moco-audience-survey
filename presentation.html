@@ -565,24 +565,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="slide" id="s24">
   <div class="eyebrow">Live Results</div>
   <div class="slide-title" style="font-size:22px;margin-bottom:4px">Survey: If mo.co team was a player</div>
-  <div style="font-size:13px;color:#999;margin-bottom:16px">What would be the strongest motivations? Live results from the team survey.</div>
+  <div style="font-size:13px;color:#999;margin-bottom:14px">What would be the strongest motivations? Live results from the team survey.</div>
   <div id="survey-loading" class="loading-state"><div class="spinner"></div> Loading live results...</div>
-  <div id="survey-results" style="display:none;flex:1;flex-direction:column">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1">
-      <div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#bbb;margin-bottom:8px">Cluster Distribution</div><div class="chart-wrap"><canvas id="clusterChart"></canvas></div></div>
-      <div><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#bbb;margin-bottom:8px">Top Motivations</div><div class="chart-wrap"><canvas id="motivationChart"></canvas></div></div>
+  <div id="survey-error" style="display:none;text-align:center;padding:20px">
+    <div style="font-size:14px;color:#c0392b;margin-bottom:6px">Could not load live data</div>
+    <div id="survey-error-msg" style="font-size:12px;color:#aaa;margin-bottom:12px"></div>
+    <button onclick="loadSurvey()" style="font-size:12px;padding:6px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer">Try again</button>
+  </div>
+  <div id="survey-results" style="display:none;flex:1;flex-direction:column;gap:12px;min-height:0">
+    <!-- Top row: dominant + secondary + tertiary -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;flex-shrink:0">
+      <div id="dominant-card" style="border-radius:8px;padding:14px 16px;background:#1a6db5;color:#fff">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;opacity:.75;margin-bottom:4px">Group's Dominant Motivation</div>
+        <div id="dominant-name" style="font-size:18px;font-weight:700;margin-bottom:2px">—</div>
+        <div id="dominant-quote" style="font-size:11px;font-style:italic;opacity:.85">—</div>
+      </div>
+      <div id="secondary-card" style="border:1px solid #e0e0e0;border-radius:8px;padding:14px 16px;background:#fafafa">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#aaa;margin-bottom:4px">Secondary</div>
+        <div id="secondary-name" style="font-size:15px;font-weight:700;color:#333">—</div>
+      </div>
+      <div id="tertiary-card" style="border:1px solid #e0e0e0;border-radius:8px;padding:14px 16px;background:#fafafa">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#aaa;margin-bottom:4px">Tertiary</div>
+        <div id="tertiary-name" style="font-size:15px;font-weight:700;color:#333">—</div>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;gap:14px;font-size:11px;color:#bbb;padding-top:10px;border-top:1px solid #f0f0f0;flex-shrink:0">
-      <span id="resp-count"></span><span id="last-upd"></span>
+    <!-- Full motivation landscape -->
+    <div style="flex:1;min-height:0">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#aaa;margin-bottom:8px">Full Group Motivation Landscape</div>
+      <div id="motivation-bars" style="display:flex;flex-direction:column;gap:7px"></div>
+    </div>
+    <!-- Footer -->
+    <div style="display:flex;align-items:center;gap:14px;font-size:11px;color:#bbb;padding-top:8px;border-top:1px solid #f0f0f0;flex-shrink:0">
+      <span id="resp-count"></span>
+      <span id="last-upd"></span>
       <button onclick="loadSurvey()" style="font-size:11px;padding:3px 10px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;color:#555">Refresh</button>
     </div>
-  </div>
-  <div id="survey-error" style="display:none;flex:1;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-align:center">
-    <div style="font-size:14px;color:#c0392b">Could not load live data</div>
-    <div id="survey-error-msg" style="font-size:12px;color:#aaa;margin-top:4px"></div>
-    <div style="font-size:12px;color:#aaa">Survey: bmkwon1.github.io/moco-audience-survey</div>
-    <div style="font-size:12px;color:#bbb;max-width:400px">If your survey app stores results in a different backend, share the endpoint and I'll wire it directly.</div>
-    <button onclick="loadSurvey()" style="font-size:12px;padding:6px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;margin-top:4px">Try again</button>
   </div>
 </div>
 
