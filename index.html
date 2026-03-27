@@ -95,18 +95,6 @@ button { font-family: Arial, sans-serif; cursor: pointer; }
 </head>
 <body>
   <script>
-  (function() {
-    const correct = "brickcity"; // change to your preferred password
-    const entered = sessionStorage.getItem("auth");
-    if (entered !== correct) {
-      const pwd = prompt("Enter password to access the survey:");
-      if (pwd !== correct) {
-        document.body.innerHTML = "<p style='font-family:Arial;text-align:center;margin-top:20%;color:#888'>Access denied.</p>";
-        return;
-      }
-      sessionStorage.setItem("auth", correct);
-    }
-  })();
 </script>
 <div id="app"></div>
 <script>
